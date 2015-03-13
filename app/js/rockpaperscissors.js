@@ -29,41 +29,41 @@ function getComputerMove(move) {
     return move || randomPlay();
 }
 
-var playerMove = getPlayerMove();
-var computerMove = getComputerMove();
-
-function getWinner(playerMove,computerMove) {
+function getWinner(playerMove, computerMove) {
     var winner;
     if (playerMove === computerMove) {
         winner = "tie";
-        } 
-    else if (playerMove === "rock" && computerMove === "scissors") {
+    } else if (playerMove === "rock" && computerMove === "scissors") {
         winner = "player";
-        }
-    else if (playerMove === "paper" && computerMove === "rock") {
+    } else if (playerMove === "paper" && computerMove === "rock") {
         winner = "player";
-        }
-    else if (playerMove === "scissors" && computerMove === "paper") {
+    } else if (playerMove === "scissors" && computerMove === "paper") {
         winner = "player";
-        }
-    else if (computerMove === "rock" && playerMove === "scissors") {
+    } else {
         winner = "computer";
-        }
-    else if (computerMove === "paper" && playerMove === "rock") {
-        winner = "computer";
-        }
-    else if (computerMove === "scissors" && playerMove === "paper") {
-        winner = "computer";
-        }
+    }
     return winner;
 }
 
 function playToFive() {
-    console.log("Let's play Rock, Paper, Scissors");
     var playerWins = 0;
     var computerWins = 0;
-    // Write code that plays 'Rock, Paper, Scissors' until either the player or the computer has won five times.
-    /* YOUR CODE HERE */
+    while (playerWins < 5 && computerWins < 5) {
+        var playerMove = getPlayerMove();
+        var computerMove = getComputerMove();
+        var result = getWinner(playerMove, computerMove);
+        if (result === "player") {
+            playerWins++;
+        } else if (result === "computer") {
+            computerWins++;
+        } else if (result === "tie") {
+            console.log("\n" + "Looks like it's a tie...");
+        }
+
+        console.log("\n" + "User choses " + playerMove + " and Computer choses " + computerMove + ".");
+        console.log("The score is currently:   Humans  " + playerWins + "  |  Machines  " + computerWins + "\n");
+
+    }
     return [playerWins, computerWins];
 }
-
+playToFive();
